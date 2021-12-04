@@ -1,0 +1,9 @@
+<html>
+<script>
+    var HOST = location.origin.replace(/^http/, 'ws')
+    var ws = new WebSocket(HOST);
+
+    ws.send('this is a message');
+</script>
+
+</html>
