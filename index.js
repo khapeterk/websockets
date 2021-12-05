@@ -1,6 +1,5 @@
 const express = require('express');
-const ws = require('ws');
-const http = require('http');
+const { Server } = require('ws');
 
 const app = express();
 app.use((req, res) => res.sendFile('/index.html', { root: __dirname }))
@@ -10,8 +9,7 @@ app.listen(port, () => {
   console.log(`server started on part ${port}`)
 })
 
-const server = http.createServer(app);
-const wss = new ws.Server({ server })
+const wss = new Server({ app })
 
 wss.on('connection', (ws) => {
 	ws.on('message', (message) => {
