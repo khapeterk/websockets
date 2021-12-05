@@ -2,8 +2,9 @@
 <script>
     var HOST = location.origin.replace(/^http/, 'ws')
     var ws = new WebSocket(HOST);
-
-    ws.send('this is a message');
+    ws.onmessage = (event) => {
+      console.log(event.data)
+    }
 </script>
 
 </html>
