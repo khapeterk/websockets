@@ -1,15 +1,14 @@
 const express = require('express');
 const { Server } = require('ws');
 
-const app = express();
-app.use((req, res) => res.sendFile('/index.html', { root: __dirname }))
+const PORT = process.env.PORT || 3000;
+const INDEX = '/index.html';
 
-const port = process.env.PORT || 3000
-app.listen(port, () => {
-  console.log(`server started on part ${port}`)
-})
+const server = express()
+  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-const wss = new Server({ app })
+const wss = new Server({ server });
 
 wss.on('connection', (ws) => {
 	ws.on('message', (message) => {
